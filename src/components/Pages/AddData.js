@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 function AddData(){
+    const [posts, setPosts] = useState([]);
+    
     let newTitle = 'New Post';
     let newContent = 'Content of new post';
     const newPost = { name: newTitle, occupation: newContent };
