@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Modal.css'
 
 function ShowList() {
     const [posts, setPosts] = useState([]);
@@ -54,16 +55,7 @@ function ShowList() {
             <button onClick={openModal}>Add Post</button>
 
             {isModalOpen && (
-                <div style={{
-                    position: 'fixed', 
-                    top: '50%', 
-                    left: '50%', 
-                    transform: 'translate(-50%, -50%)', 
-                    backgroundColor: 'white', 
-                    padding: '20px', 
-                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', 
-                    zIndex: 1000
-                }}>
+                <div id="Modal">
                 <h2>Add a New Post</h2>
                 <label>
                     Title:
