@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import AddData from "./AddData";
+import EditData from "./EditData";
+
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -9,25 +12,6 @@ function Posts() {
       .then(data => setPosts(data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
-
-  const addPost = () => {
-    let newTitle = 'New Post';
-    let newContent = 'Content of new post';
-    const newPost = { title: newTitle, content: newContent };
-
-    fetch('https://6735a7195995834c8a9389c1.mockapi.io/api/v1/posts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newPost),
-    })
-      .then(response => response.json())
-      .then(data => {
-        setPosts([...posts, data]);
-      })
-      .catch(error => console.error('Error adding post:', error));
-  };
 
   const deletePost = (id) => {
     fetch(`https://6735a7195995834c8a9389c1.mockapi.io/api/v1/posts/${id}`, {
@@ -42,13 +26,14 @@ function Posts() {
   return (
     <div>
       <h1>Posts</h1>
-      <button onClick={addPost}>Add Post</button>
+      <button onClick={<AddData />}>Add Post</button>
       <ul>
         {posts.map(post => (
           <li key={post.id}>
             <h2>{post.name}</h2>
             <p>{post.occupation}</p>
             <button onClick={() => deletePost(post.id)}>Delete</button>
+            <button onClick={<EditData />}>Edit</button>
           </li>
         ))}
       </ul>
