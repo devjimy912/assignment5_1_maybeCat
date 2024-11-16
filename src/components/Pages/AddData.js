@@ -1,4 +1,4 @@
-
+import useState from 'react';
 
 function AddData(){
     const [posts, setPosts] = useState([]);
