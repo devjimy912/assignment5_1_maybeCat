@@ -4,8 +4,10 @@ import './Modal.css'
 function ShowList() {
     const [posts, setPosts] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [newTitle, setNewTitle] = useState('');
-    const [newContent, setNewContent] = useState('');
+    const [newName, setNewName] = useState('');
+    const [newOccupation, setNewOccupation] = useState('');
+    const [newEmail, setNewEmail] = useState('');
+    const [newAge, setNewAge] = useState('');
 
     useEffect(() => {
         fetch('https://6735a7195995834c8a9389c1.mockapi.io/api/v1/posts')
@@ -17,12 +19,12 @@ function ShowList() {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => {
         setIsModalOpen(false);
-        setNewTitle('');
-        setNewContent('');
+        setNewName('');
+        setNewOccupation('');
     };
 
     const handleAddPost = () => {
-        const newPost = { name: newTitle, occupation: newContent };
+        const newPost = { name: newName, occupation: newOccupation };
 
         fetch('https://6735a7195995834c8a9389c1.mockapi.io/api/v1/posts', {
             method: 'POST',
@@ -58,22 +60,40 @@ function ShowList() {
                 <div id="Modal">
                 <h2>Add a New Post</h2>
                 <label>
-                    Title:
+                    Name:
                     <input 
                         type="text" 
-                        value={newTitle} 
-                        onChange={(e) => setNewTitle(e.target.value)} 
+                        value={newName} 
+                        onChange={(e) => setNewName(e.target.value)} 
                     />
                 </label>
                 <br />
                 <label>
-                    Content:
+                    Email:
+                    <input 
+                        type="email" 
+                        value={newEmail} 
+                        onChange={(e) => setNewEmail(e.target.value)} 
+                    />
+                </label>
+                <br />
+                <label>
+                    Age:
+                    <input 
+                        type="number" 
+                        value={newAge} 
+                        onChange={(e) => setNewAge(e.target.value)} 
+                    />
+                </label>
+                <br />
+                <label>
+                    Occupation:
                     <input 
                         type="text" 
-                        value={newContent} 
-                        onChange={(e) => setNewContent(e.target.value)} 
+                        value={newOccupation} 
+                        onChange={(e) => setNewOccupation(e.target.value)} 
                     />
-                    </label>
+                </label>
                     <br />
                     <button onClick={handleAddPost}>Submit</button>
                     <button onClick={closeModal}>Cancel</button>
@@ -84,6 +104,8 @@ function ShowList() {
                 {posts.map(post => (
                     <li key={post.id}>
                         <h2>{post.name}</h2>
+                        <p>{post.age}</p>
+                        <p>{post.email}</p>
                         <p>{post.occupation}</p>
                         <button onClick={() => deletePost(post.id)}>Delete</button>
                     </li>
