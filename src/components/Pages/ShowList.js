@@ -4,7 +4,7 @@ function Posts() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch('https://673589be5995834c8a9319d5.mockapi.io/api/db/posts')
+    fetch('https://6735a7195995834c8a9389c1.mockapi.io/api/v1/posts')
       .then(response => response.json())
       .then(data => setPosts(data))
       .catch(error => console.error('Error fetching data:', error));
@@ -15,7 +15,7 @@ function Posts() {
     let newContent = 'Content of new post';
     const newPost = { title: newTitle, content: newContent };
 
-    fetch('https://673589be5995834c8a9319d5.mockapi.io/api/db/posts', {
+    fetch('https://6735a7195995834c8a9389c1.mockapi.io/api/v1/posts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ function Posts() {
   };
 
   const deletePost = (id) => {
-    fetch(`https://673589be5995834c8a9319d5.mockapi.io/api/db/posts/${id}`, {
+    fetch(`https://6735a7195995834c8a9389c1.mockapi.io/api/v1/posts/${id}`, {
       method: 'DELETE',
     })
       .then(() => {
@@ -46,8 +46,8 @@ function Posts() {
       <ul>
         {posts.map(post => (
           <li key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
+            <h2>{post.name}</h2>
+            <p>{post.occupation}</p>
             <button onClick={() => deletePost(post.id)}>Delete</button>
           </li>
         ))}
